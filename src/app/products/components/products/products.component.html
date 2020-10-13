@@ -31,7 +31,13 @@
 <form (ngSubmit)="onSubmit()">
 
   <div class="div-upload">
-    <input id="file" class="input-upload" type="file" (change)="uploadFileProduct($event.target.files)" accept=".json">
+    <input 
+      id="file" 
+      class="input-upload" 
+      type="file" 
+      (change)="uploadFileProduct($event.target.files)" 
+      accept=".json"
+      #inputFile>
     <label for="file" class="label-upload"></label>
   </div>
 

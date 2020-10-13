@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit, ElementRef } from '@angular/core';
 import { ProductApiService } from '../../api/product-api.service';
 
 @Component({
@@ -11,15 +11,21 @@ export class ProductsComponent implements OnInit {
   public file: File;
   public selecionarFiles: FileList;
   public products: any = [];
-
   public formData = new FormData();
 
+  
   constructor(private productApiService: ProductApiService) { }
-
+  
   ngOnInit(): void {
     this.listProducts();
     this.showFileName();
-    
+  }
+  
+  @ViewChild('inputFile', {static: false})
+  inputFile: ElementRef; 
+  
+  reset(){
+    this.inputFile.nativeElement.value = "";
   }
 
   public showFileName(){
@@ -56,6 +62,7 @@ export class ProductsComponent implements OnInit {
       (error) => {
         alert('Something Went Wrong !!!')
       })
+      this.reset();
   }
 
   uploadFileProduct(files: FileList) {

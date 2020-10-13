@@ -1,0 +1,79 @@
+<div class="container my-4">
+
+  <nav class="navbar navbar-light banner">
+    <a class="navbar-brand" href="#">
+      <img src="assets/logo_coodesh.svg" width="100px" height="30" class="d-inline-block align-top" alt=""
+        loading="lazy">
+    </a>
+  </nav>
+</div>
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-link active alinhar-home" href="#">Home <span class="sr-only">(current)</span></a>
+    </div>
+  </div>
+</nav>
+
+
+<div class="div-card">
+  <div class="card-body texto-card">Upload Products</div>
+</div>
+
+<form (ngSubmit)="onSubmit()">
+
+  <div class="div-upload">
+    <input id="file" class="input-upload" type="file" (change)="uploadFileProduct($event.target.files)" accept=".json">
+    <label for="file" class="label-upload"></label>
+  </div>
+
+  <div class="div-botao-enviar">
+    <button class="botao-enviar btn-primary" type="submit">Enviar</button>
+  </div>
+
+</form>
+
+<div class="container">
+  <div class="container-table">
+    <table class="table table-bordered">
+      <thead class="table-success">
+        <tr>
+          <th scope="col">Title</th>
+          <th scope="col">Type</th>
+          <th scope="col">Rating</th>
+          <th scope="col">Price</th>
+          <th scope="col">CreatedAt</th>
+          <th scope="col">Açoes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products; let i = index">
+          <td>{{product.title}}</td>
+          <td>{{product.type}}</td>
+          <td>{{product.rating}}</td>
+          <td>{{product.price | currency : 'R$'}}</td>
+          <td>{{product.createdAt | date: 'dd/MM/yyyy'}}</td>
+          <td class="text-center edit-block">
+
+            <span class="edit" [routerLink]="['/products/', product.id]">
+              <button type="button" class="btn btn-success btn-sm">Editar</button>
+            </span>
+            <span class="delete" (click)="removeProduct(product.id)">
+              <button type="button" class="btn btn-danger btn-sm botao-deletar">
+                Deletar
+              </button>
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
